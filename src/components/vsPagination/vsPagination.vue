@@ -29,6 +29,19 @@
           </li>
         </ul>
       </div>
+      <div v-if="statistics">
+        <ul class="vs-pagination--array">
+          <li 
+            v-for="(row,index) in statisticalItems" 
+            :key="index">
+            <span
+              :style="styleDescription"
+              :class="`vs-description-${statisticsColor}`"
+            >{{ row.name }}{{ row.data }}</span>
+            <span v-if="index != (statisticalItems.length - 1)">,</span>
+          </li>
+        </ul>
+      </div>
     </vs-col>
     <vs-col
       class="vs-pagination--mb"
@@ -180,6 +193,18 @@ export default {
     descriptionBody: {
       type: String,
       default: "Pages"
+    },
+    statistics: {
+      default: false,
+      type: Boolean
+    },
+    statisticalItems: {
+      default: () => [],
+      type: Array
+    },
+    statisticsColor: {
+      type: String,
+      default: "primary"
     },
     pagedown: {
       default: false,
