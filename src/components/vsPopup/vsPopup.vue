@@ -4,6 +4,7 @@
       v-show="active"
       ref="con"
       :class="[`vs-popup-${color}`,{'fullscreen':fullscreen}]"
+      :style="{'z-index':numPopup}"
       class="vs-component con-vs-popup"
       @click="close($event,true)">
       <div
@@ -45,101 +46,118 @@
 </template>
 
 <script>
-import _color from '../../utils/color.js'
+import _color from "../../utils/color.js";
 export default {
-  name:'VsPopup',
-  props:{
-    color:{
-      default:'primary',
-      type:String
+  name: "VsPopup",
+  props: {
+    color: {
+      default: "primary",
+      type: String
     },
     active: {
-      default:false,
+      default: false,
       type: Boolean
     },
-    title:{
-      default:'popup',
-      type:String
-    },
-    buttonCloseHidden:{
-      default:false,
-      type:Boolean
-    },
-    fullscreen:{
-      default:false,
-      type:Boolean
-    },
-    backgroundColor:{
-      default:null,
-      type:String
-    },
-    backgroundColorPopup:{
-      default:'rgb(255,255,255)',
-      type:String
-    },
-    styleContent:{
-      default:null,
+    title: {
+      default: "popup",
       type: String
     },
-    classContent:{
-      default:null,
+    buttonCloseHidden: {
+      default: false,
+      type: Boolean
+    },
+    fullscreen: {
+      default: false,
+      type: Boolean
+    },
+    backgroundColor: {
+      default: null,
       type: String
     },
-    iconPack:{
-      default:'material-icons',
-      type:String
+    backgroundColorPopup: {
+      default: "rgb(255,255,255)",
+      type: String
     },
-    iconClose:{
-      default:'close',
-      type:String
+    styleContent: {
+      default: null,
+      type: String
     },
-  },
-  computed:{
-    styleHeader(){
-      return {
-        color: _color.getColor(this.color,1),
-      }
+    classContent: {
+      default: null,
+      type: String
     },
-    styleAfter(){
-      return {
-        background: _color.getColor(this.color,1)
-      }
+    iconPack: {
+      default: "material-icons",
+      type: String
     },
-    styleCon(){
-      return {
-        background: _color.getColor(this.backgroundColor,1)
-      }
-    },
-    stylePopup(){
-      return {
-        background: _color.getColor(this.backgroundColorPopup,1)
-      }
+    iconClose: {
+      default: "close",
+      type: String
     }
   },
-  mounted(){
-    this.insertBody()
-  },
-  methods:{
-    giveColor(color){
-      return _color.rColor(color)
+  data: () => ({
+    numPopup: 53000
+  }),
+  computed: {
+    styleHeader() {
+      return {
+        color: _color.getColor(this.color, 1)
+      };
     },
-    close(event,con){
-      if(con){
-        if(event.target.className
-            && event.target.className.indexOf
-            && event.target.className.indexOf('vs-popup--background')!=-1){
-          this.$emit('update:active',false)
-          this.$emit('close', false)
-        } else if(!this.buttonCloseHidden && event.srcElement == this.$refs.btnclose.$el){
-          this.$emit('update:active',false)
-          this.$emit('close', false)
+    styleAfter() {
+      return {
+        background: _color.getColor(this.color, 1)
+      };
+    },
+    styleCon() {
+      return {
+        background: _color.getColor(this.backgroundColor, 1)
+      };
+    },
+    stylePopup() {
+      return {
+        background: _color.getColor(this.backgroundColorPopup, 1)
+      };
+    }
+    // numPopup() {
+    //   if (this.$vs.popNum) {
+    //     return (this.$vs.popNum += 1);
+    //   }
+    // }
+  },
+  created() {
+    this.$vs.popNum += 1;
+    this.numPopup += this.$vs.popNum;
+  },
+  mounted() {
+    this.insertBody();
+  },
+  methods: {
+    giveColor(color) {
+      return _color.rColor(color);
+    },
+    close(event, con) {
+      if (con) {
+        if (
+          event.target.className &&
+          event.target.className.indexOf &&
+          event.target.className.indexOf("vs-popup--background") != -1
+        ) {
+          this.$emit("update:active", false);
+          this.$emit("close", false);
+        } else if (
+          !this.buttonCloseHidden &&
+          event.srcElement == this.$refs.btnclose.$el
+        ) {
+          this.$emit("update:active", false);
+          this.$emit("close", false);
         }
       }
     },
-    insertBody(){
-      let elx = this.$refs.con
-      document.body.insertBefore(elx, document.body.firstChild)
-    },
+    insertBody() {
+      let elx = this.$refs.con;
+      document.body.insertBefore(elx, document.body.firstChild);
+    }
   }
-}
+};
 </script>

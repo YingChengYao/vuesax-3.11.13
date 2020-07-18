@@ -3,5 +3,6 @@
  * all options listed here are reactive
  */
  export default {
-   rtl: false
+   rtl: false,
+   popNum:1
  }

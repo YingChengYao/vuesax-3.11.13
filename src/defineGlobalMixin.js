@@ -12,7 +12,7 @@ export default (Vue, options) => {
         handler(val) {
           injectDirectionClass(val)
         }
-      }
+      },
     },
     beforeCreate() {
       // create $vs property if not exist
