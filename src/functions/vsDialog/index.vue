@@ -4,6 +4,7 @@
       v-if="isPrompt ? active : fActive"
       ref="con"
       :class="[`vs-dialog-${color}`]"
+      :style="{'z-index':numPopup}"
       class="vs-component con-vs-dialog">
       <div
         class="vs-dialog-dark"
@@ -68,76 +69,77 @@ export default {
   props: {
     color: {
       default: "primary",
-      type: String
+      type: String,
     },
     active: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     buttonAccept: {
       default: "filled",
-      type: String
+      type: String,
     },
     buttonCancel: {
       default: "flat",
-      type: String
+      type: String,
     },
     isValid: {
       default: "none",
-      type: [Boolean, String]
+      type: [Boolean, String],
     },
     buttonsHidden: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     acceptText: {
       default: "Accept",
-      type: String
+      type: String,
     },
     cancelText: {
       default: "Cancel",
-      type: String
+      type: String,
     },
     iconPack: {
       default: "material-icons",
-      type: String
+      type: String,
     },
     closeIcon: {
       default: "close",
-      type: String
+      type: String,
     },
     text: {
       default: null,
-      type: String
+      type: String,
     },
     title: {
       default: "Dialog",
-      type: String
+      type: String,
     },
     type: {
       default: "alert",
-      type: String
+      type: String,
     },
     parent: {
-      default: null
-    }
+      default: null,
+    },
   },
   data: () => ({
     isPrompt: true,
     fActive: false,
-    parameters: null
+    parameters: null,
+    numPopup: 53000
   }),
   computed: {
     styleHeader() {
       return {
-        color: _color.getColor(this.color, 1)
+        color: _color.getColor(this.color, 1),
       };
     },
     styleAfter() {
       return {
-        background: _color.getColor(this.color, 1)
+        background: _color.getColor(this.color, 1),
       };
-    }
+    },
   },
   watch: {
     active() {
@@ -153,7 +155,11 @@ export default {
           this.insertBody();
         }
       });
-    }
+    },
+  },
+  created() {
+    this.$vs.popNum += 1;
+    this.numPopup += this.$vs.popNum;
   },
   mounted() {
     if (this.active && this.isPrompt) {
@@ -231,7 +237,7 @@ export default {
       let elx = this.$refs.con;
       let parentx = this.parent ? this.parent : document.body;
       parentx.insertBefore(elx, parentx.firstChild);
-    }
-  }
+    },
+  },
 };
 </script>

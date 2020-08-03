@@ -364,7 +364,7 @@ export default {
       let lengthx = items.filter(item => {
         return item.visible;
       });
-
+      
       if (lengthx.length == 0) {
         this.clear = true;
       } else {
