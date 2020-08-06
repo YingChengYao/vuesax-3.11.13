@@ -58,7 +58,7 @@ export default {
     },
     widthx:0,
     fixed:false,
-
+    numPopup: 53000,
   }),
   computed:{
     fillingStyle(){
@@ -75,7 +75,8 @@ export default {
         ...this.cords,
         color: this.colorText,
         width: this.fullWidth?`calc(100% - 14px)`:``,
-        maxWidth: this.fullWidth?'none':`350px`
+        maxWidth: this.fullWidth?'none':`350px`,
+        "z-index": this.numPopup,
       }
     }
   },
@@ -83,7 +84,8 @@ export default {
     setTimeout( () => {
       this.moverNotis()
     }, 0);
-    this.changeCords()
+    this.changeCords();
+    this.numPopup += this.$vs.popNum;
   },
   mounted(){
     setTimeout( () => {
