@@ -58,7 +58,7 @@
         class="cursor-pointer mr-4 items-per-page-handler"
       >
         <div
-          class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
+          class="pr-4 pl-4 pt-3 pb-3 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
         >
           <span class="mr-2">共{{ totalItems }}条 {{ size }}条/页</span>
           <feather-icon 
