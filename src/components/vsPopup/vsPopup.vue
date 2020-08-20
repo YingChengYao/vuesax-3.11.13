@@ -27,7 +27,7 @@
             ref="btnclose"
             :icon-pack="iconPack"
             :icon="iconClose"
-            :style="stylePopup"
+            :style="styleColorPopup"
             class="vs-popup--close vs-popup--close--icon"
             @click="close"
           />
@@ -52,73 +52,83 @@ export default {
   props: {
     color: {
       default: "primary",
-      type: String
+      type: String,
     },
     active: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     title: {
       default: "popup",
-      type: String
+      type: String,
     },
     buttonCloseHidden: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     fullscreen: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     backgroundColor: {
       default: null,
-      type: String
+      type: String,
     },
     backgroundColorPopup: {
       default: "rgb(255,255,255)",
-      type: String
+      type: String,
     },
     styleContent: {
       default: null,
-      type: String
+      type: String,
     },
     classContent: {
       default: null,
-      type: String
+      type: String,
     },
     iconPack: {
       default: "material-icons",
-      type: String
+      type: String,
     },
     iconClose: {
       default: "close",
-      type: String
-    }
+      type: String,
+    },
+    width: {
+      default: null,
+      type: String,
+    },
   },
   data: () => ({
-    numPopup: 53000
+    numPopup: 53000,
   }),
   computed: {
     styleHeader() {
       return {
-        color: _color.getColor(this.color, 1)
+        color: _color.getColor(this.color, 1),
       };
     },
     styleAfter() {
       return {
-        background: _color.getColor(this.color, 1)
+        background: _color.getColor(this.color, 1),
       };
     },
     styleCon() {
       return {
-        background: _color.getColor(this.backgroundColor, 1)
+        background: _color.getColor(this.backgroundColor, 1),
+      };
+    },
+    styleColorPopup() {
+      return {
+        background: _color.getColor(this.backgroundColorPopup, 1),
       };
     },
     stylePopup() {
       return {
-        background: _color.getColor(this.backgroundColorPopup, 1)
+        background: _color.getColor(this.backgroundColorPopup, 1),
+        width: this.width,
       };
-    }
+    },
     // numPopup() {
     //   if (this.$vs.popNum) {
     //     return (this.$vs.popNum += 1);
@@ -157,7 +167,7 @@ export default {
     insertBody() {
       let elx = this.$refs.con;
       document.body.insertBefore(elx, document.body.firstChild);
-    }
-  }
+    },
+  },
 };
 </script>
