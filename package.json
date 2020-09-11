@@ -75,7 +75,8 @@
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended"
-    ]
+    ],
+    "no-console": "off"
   },
   "postcss": {
     "plugins": {

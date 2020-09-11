@@ -60,8 +60,9 @@
       <transition name="icon-validate" >
         <span
           v-if="success || danger || warning"
+          :class="{'icon-before':iconAfter}"
           class="input-icon-validate vs-input--icon-validate"
-          :class="{'icon-before':iconAfter}">
+          >
           <vs-icon
             :class="{'icon-before':iconAfter}"
             :iconPack="valIconPack"
@@ -117,9 +118,6 @@
         </span>
       </div>
     </transition-group>
-
-
-
   </div>
 </template>
 
