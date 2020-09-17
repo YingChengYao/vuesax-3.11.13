@@ -241,12 +241,6 @@ export default {
       }
     },
     datax(val, newval) {
-      // let valJson = JSON.stringify(val);
-      // let newvalJson = JSON.stringify(newval);
-      // if(valJson === newvalJson)
-      //   return;
-      window.console.log('val:',val)
-      window.console.log('newval:',newval)
       if(val===newval)
         return
       
