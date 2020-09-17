@@ -153,6 +153,7 @@ export default {
     currentSortKey: null,
     currentSortType: null,
     isNoData: false,
+    isMounted: false,
   }),
   computed: {
     getTotalPages() {
@@ -240,10 +241,14 @@ export default {
       }
     },
     datax(val, newval) {
-      let valJson = JSON.stringify(val);
-      let newvalJson = JSON.stringify(newval);
-      if(valJson === newvalJson)
-        return;
+      // let valJson = JSON.stringify(val);
+      // let newvalJson = JSON.stringify(newval);
+      // if(valJson === newvalJson)
+      //   return;
+      window.console.log('val:',val)
+      window.console.log('newval:',newval)
+      if(val===newval)
+        return
       
       if (typeof this.datax == Object) {
         this.isNoData = this.datax
@@ -258,6 +263,7 @@ export default {
     window.addEventListener("resize", this.listenerChangeWidth);
     this.maxItemsx = this.maxItems;
     this.loadData();
+    this.isMounted=true
 
     // this.$nextTick(() => {
     //   if(this.datax.length > 0) {
@@ -272,16 +278,19 @@ export default {
     loadData() {
       let max = Math.ceil(this.currentx * this.maxItemsx);
       let min = max - this.maxItemsx;
-
+      let datas = [];
       if (!this.searchx || this.sst) {
-        this.datax = this.pagination
+        datas = this.pagination
           ? this.getItems(min, max)
           : this.sortItems(this.data) || [];
       } else {
-        this.datax = this.pagination
+        datas = this.pagination
           ? this.getItemsSearch(min, max)
           : this.getItemsSearch(min, max) || [];
       }
+      if(!this.isMounted)
+        return
+      this.datax = datas;
     },
     getItems(min, max) {
       let dataBase = this.sortItems(this.data);
